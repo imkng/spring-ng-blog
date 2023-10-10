@@ -26,13 +26,13 @@ public class Post {
     private Instant updatedOn;
     @Column
     @NotBlank
-    private String userName;
+    private String username;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,11 +68,11 @@ public class Post {
         this.updatedOn = updatedOn;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
