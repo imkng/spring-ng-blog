@@ -1,5 +1,6 @@
 package com.programming.springblog.service;
 
+import com.programming.springblog.dto.AuthenticationResponse;
 import com.programming.springblog.dto.LoginRequest;
 import com.programming.springblog.dto.RegisterRequest;
 import com.programming.springblog.model.User;
@@ -38,12 +39,12 @@ public class AuthService {
         return passwordEncoder.encode(password);
     }
 
-    public String login(LoginRequest loginRequest) {
+    public AuthenticationResponse login(LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
-
-        return jwtProvider.generateToken(authenticate);
+        String authenticationToken = jwtProvider.generateToken(authenticate);
+        return new AuthenticationResponse(authenticationToken, loginRequest.getUserName());
     }
 
     public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
